@@ -1018,7 +1018,9 @@ do
   -- require 'kickstart.plugins.indent_line'
   -- require 'kickstart.plugins.lint'
   -- require 'kickstart.plugins.autopairs'
-  -- require 'kickstart.plugins.neo-tree'
+  require 'kickstart.plugins.neo-tree'
+
+  vim.keymap.set("n", "<leader>e", "<Cmd>Neotree toggle<CR>")
 
   -- NOTE: You can add your own plugins, configuration, etc. in `lua/custom/plugins/*.lua`.
   --
