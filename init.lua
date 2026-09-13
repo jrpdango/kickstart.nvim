@@ -731,6 +731,15 @@ do
   -- Enable the following language servers
   --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
   --  See `:help lsp-config` for information about keys and how to configure
+
+  -- Lets vtsls understand TypeScript inside .vue <script> blocks.
+  local vue_plugin = {
+    name = '@vue/typescript-plugin',
+    location = vim.fn.stdpath 'data' .. '/mason/packages/vue-language-server/node_modules/@vue/language-server',
+    languages = { 'vue' },
+    configNamespace = 'typescript',
+  }
+
   ---@type table<string, vim.lsp.Config>
   local servers = {
     -- clangd = {},
@@ -775,6 +784,15 @@ do
         Lua = {
           format = { enable = false }, -- Disable formatting (formatting is done by stylua)
         },
+      },
+    },
+
+    vue_ls = {},
+
+    vtsls = {
+      filetypes = { 'javascript', 'javascriptreact', 'typescript', 'typescriptreact', 'vue' },
+      settings = {
+        vtsls = { tsserver = { globalPlugins = { vue_plugin } } },
       },
     },
   }
