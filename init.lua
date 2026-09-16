@@ -833,6 +833,7 @@ do
   local ensure_installed = vim.tbl_keys(servers or {})
   vim.list_extend(ensure_installed, {
     -- You can add other tools here that you want Mason to install
+    'prettier',
   })
 
   require('mason-tool-installer').setup { ensure_installed = ensure_installed }
@@ -855,8 +856,20 @@ do
     format_on_save = function(bufnr)
       -- You can specify filetypes to autoformat on save here:
       local enabled_filetypes = {
-        -- lua = true,
-        -- python = true,
+        javascript = true,
+        javascriptreact = true,
+        typescript = true,
+        typescriptreact = true,
+        vue = true,
+        css = true,
+        scss = true,
+        less = true,
+        html = true,
+        json = true,
+        jsonc = true,
+        yaml = true,
+        markdown = true,
+        graphql = true,
       }
       if enabled_filetypes[vim.bo[bufnr].filetype] then
         return { timeout_ms = 500 }
@@ -869,12 +882,20 @@ do
     },
     -- You can also specify external formatters in here.
     formatters_by_ft = {
-      -- rust = { 'rustfmt' },
-      -- Conform can also run multiple formatters sequentially
-      -- python = { "isort", "black" },
-      --
-      -- You can use 'stop_after_first' to run the first available formatter from the list
-      -- javascript = { "prettierd", "prettier", stop_after_first = true },
+      javascript = { 'prettier' },
+      javascriptreact = { 'prettier' },
+      typescript = { 'prettier' },
+      typescriptreact = { 'prettier' },
+      vue = { 'prettier' },
+      css = { 'prettier' },
+      scss = { 'prettier' },
+      less = { 'prettier' },
+      html = { 'prettier' },
+      json = { 'prettier' },
+      jsonc = { 'prettier' },
+      yaml = { 'prettier' },
+      markdown = { 'prettier' },
+      graphql = { 'prettier' },
     },
   }
 
