@@ -171,6 +171,18 @@ do
   -- instead raise a dialog asking if you wish to save the current file(s)
   -- See `:help 'confirm'`
   vim.o.confirm = true
+
+  -- number of spaces that a <Tab> in the file counts for
+  vim.opt.tabstop = 4
+
+  -- size of an indent
+  vim.opt.shiftwidth = 4
+
+  -- number of spaces that a <Tab> counts for while performing editing operations
+  vim.opt.softtabstop = 4
+
+  -- convert tabs to spaces
+  vim.opt.expandtab = true
 end
 
 -- ============================================================
