@@ -10,6 +10,24 @@ require('flutter-tools').setup {
   debugger = {
     enabled = true,
     exception_breakpoints = {},
+    -- Flutter-tools registers the default debug launch configs. Add a profile
+    -- config using the DAP `toolArgs`/`noDebug` fields (the generic `args`
+    -- field is passed to the app, not to `flutter run`), so `:FlutterRun` can
+    -- offer a working `--profile` launch alongside the debug ones.
+    register_configurations = function(paths)
+      local dap = require 'dap'
+      dap.configurations.dart = dap.configurations.dart or {}
+      table.insert(dap.configurations.dart, {
+        type = 'dart',
+        request = 'launch',
+        name = 'Profile (no debug)',
+        program = 'lib/main.dart',
+        toolArgs = { '--profile' },
+        noDebug = true,
+        dartSdkPath = paths.dart_sdk,
+        flutterSdkPath = paths.flutter_sdk,
+      })
+    end,
   },
   lsp = {
     settings = {
