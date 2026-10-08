@@ -17,6 +17,20 @@ require('neo-tree').setup {
     window = {
       mappings = {
         ['\\'] = 'close_window',
+        ['<space>'] = {
+          'open',
+          nowait = false,
+        },
+        ['O'] = {
+          function(state)
+            local node = state.tree:get_node()
+            if node and node.type == 'file' then
+              local image_open = require 'custom.image_open'
+              image_open.open(node.path)
+            end
+          end,
+          desc = '[O]pen externally',
+        },
       },
     },
   },
