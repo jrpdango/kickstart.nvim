@@ -599,12 +599,16 @@ do
 
       -- Jump to the implementation of the word under your cursor.
       -- Useful when your language has ways of declaring types without an actual implementation.
-      vim.keymap.set('n', 'gri', builtin.lsp_implementations, { buffer = buf, desc = '[G]oto [I]mplementation' })
+      vim.keymap.set('n', 'gri', function()
+        builtin.lsp_implementations { jump_type = 'tab' }
+      end, { buffer = buf, desc = '[G]oto [I]mplementation' })
 
       -- Jump to the definition of the word under your cursor.
       -- This is where a variable was first declared, or where a function is defined, etc.
       -- To jump back, press <C-t>.
-      vim.keymap.set('n', 'grd', builtin.lsp_definitions, { buffer = buf, desc = '[G]oto [D]efinition' })
+      vim.keymap.set('n', 'grd', function()
+        builtin.lsp_definitions { jump_type = 'tab' }
+      end, { buffer = buf, desc = '[G]oto [D]efinition' })
 
       -- Fuzzy find all the symbols in your current document.
       -- Symbols are things like variables, functions, types, etc.
@@ -617,7 +621,9 @@ do
       -- Jump to the type of the word under your cursor.
       -- Useful when you're not sure what type a variable is and you want to see
       -- the definition of its *type*, not where it was *defined*.
-      vim.keymap.set('n', 'grt', builtin.lsp_type_definitions, { buffer = buf, desc = '[G]oto [T]ype Definition' })
+      vim.keymap.set('n', 'grt', function()
+        builtin.lsp_type_definitions { jump_type = 'tab' }
+      end, { buffer = buf, desc = '[G]oto [T]ype Definition' })
     end,
   })
 
@@ -822,6 +828,11 @@ do
         vtsls = { tsserver = { globalPlugins = { vue_plugin } } },
       },
     },
+
+    -- Hover/completion for Tailwind utility classes inside strings (class="..."/className="...").
+    -- Detects v3 via tailwind.config.* or v4 via `@import "tailwindcss"` in CSS + node_modules/tailwindcss.
+    -- Defaults already cover the `className`/`class` attributes, so no settings needed here.
+    tailwindcss = {},
   }
 
   vim.pack.add {
